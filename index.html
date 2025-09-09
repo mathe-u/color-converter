@@ -3,139 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Color Picker Completo</title>
-    <style>
-        body {
-            transition: background-color 0.3s ease;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            margin: 0;
-        }
-
-        .container {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-        }
-
-        .picker-section {
-            flex-shrink: 0;
-        }
-
-        .inputs-section {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        h2 {
-            margin: 0 0 20px 0;
-            text-align: center;
-            grid-column: 1 / -1;
-        }
-
-        #picker {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(to top, black 0%, transparent 100%),
-                linear-gradient(to right, white 0%, transparent 100%);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid white;
-        }
-
-        #hue-slider {
-            width: 200px;
-            height: 20px;
-            background: linear-gradient(to right, red, yellow, lime, cyan, blue, magenta, red);
-            position: relative;
-            border-radius: 10px;
-            border: 1px solid white;
-        }
-
-        .selector {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border: 2px solid white;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-        }
-
-        #hue-selector {
-            top: 50%;
-        }
-
-        #inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        #inputs label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-
-        #inputs input {
-            width: 50px;
-            padding: 5px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 12px;
-            text-align: center;
-            color: #696868;
-        }
-
-        #hex-input {
-            width: 80px;
-            text-transform: uppercase;
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-
-        .format-label {
-            font-weight: bold;
-            min-width: 50px;
-            color: #c4bdbd;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #ffffff;
-            padding-bottom: 5px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .inputs-section {
-                width: 100%;
-                min-width: auto;
-            }
-        }
-    </style>
+    <title>Conversor de Cores - Matheus</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -154,43 +23,88 @@
             <div id="inputs">
                 <label>
                     <span class="format-label">HEX:</span>
-                    <input type="text" id="hex-input" maxlength="7" placeholder="#RRGGBB">
+                    <div class="input-copy-group">
+                        <input type="text" id="hex-input" maxlength="7" placeholder="#RRGGBB">
+                        <button class="copy-btn" data-format="hex" title="Copiar HEX">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
                 </label>
 
                 <label>
                     <span class="format-label">RGB:</span>
-                    <div class="input-group">
-                        <input type="number" id="r-input" min="0" max="255" step="1" placeholder="R">
-                        <input type="number" id="g-input" min="0" max="255" step="1" placeholder="G">
-                        <input type="number" id="b-input" min="0" max="255" step="1" placeholder="B">
+                    <div class="input-copy-group">
+                        <div class="input-group">
+                            <input type="number" id="r-input" min="0" max="255" step="1" placeholder="R">
+                            <input type="number" id="g-input" min="0" max="255" step="1" placeholder="G">
+                            <input type="number" id="b-input" min="0" max="255" step="1" placeholder="B">
+                        </div>
+                        <button class="copy-btn" data-format="rgb" title="Copiar RGB">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </label>
 
                 <label>
                     <span class="format-label">HSL:</span>
-                    <div class="input-group">
-                        <input type="number" id="h-input" min="0" max="360" step="1" placeholder="H">,
-                        <input type="number" id="s-input" min="0" max="100" step="1" placeholder="S">,
-                        <input type="number" id="l-input" min="0" max="100" step="1" placeholder="L">
+                    <div class="input-copy-group">
+                        <div class="input-group">
+                            <input type="number" id="h-input" min="0" max="360" step="1" placeholder="H">,
+                            <input type="number" id="s-input" min="0" max="100" step="1" placeholder="S">,
+                            <input type="number" id="l-input" min="0" max="100" step="1" placeholder="L">
+                        </div>
+                        <button class="copy-btn" data-format="hsl" title="Copiar HSL">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </label>
 
                 <label>
                     <span class="format-label">HSV:</span>
-                    <div class="input-group">
-                        <input type="number" id="hsv-h-input" min="0" max="360" step="1" placeholder="H">,
-                        <input type="number" id="hsv-s-input" min="0" max="100" step="1" placeholder="S">,
-                        <input type="number" id="hsv-v-input" min="0" max="100" step="1" placeholder="V">
+                    <div class="input-copy-group">
+                        <div class="input-group">
+                            <input type="number" id="hsv-h-input" min="0" max="360" step="1" placeholder="H">,
+                            <input type="number" id="hsv-s-input" min="0" max="100" step="1" placeholder="S">,
+                            <input type="number" id="hsv-v-input" min="0" max="100" step="1" placeholder="V">
+                        </div>
+                        <button class="copy-btn" data-format="hsv" title="Copiar HSV">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </label>
 
                 <label>
                     <span class="format-label">CMYK:</span>
-                    <div class="input-group">
-                        <input type="number" id="c-input" min="0" max="100" step="1" placeholder="C">,
-                        <input type="number" id="m-input" min="0" max="100" step="1" placeholder="M">,
-                        <input type="number" id="y-input" min="0" max="100" step="1" placeholder="Y">,
-                        <input type="number" id="k-input" min="0" max="100" step="1" placeholder="K">
+                    <div class="input-copy-group">
+                        <div class="input-group">
+                            <input type="number" id="c-input" min="0" max="100" step="1" placeholder="C">,
+                            <input type="number" id="m-input" min="0" max="100" step="1" placeholder="M">,
+                            <input type="number" id="y-input" min="0" max="100" step="1" placeholder="Y">,
+                            <input type="number" id="k-input" min="0" max="100" step="1" placeholder="K">
+                        </div>
+                        <button class="copy-btn" data-format="cmyk" title="Copiar CMYK">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </label>
             </div>
@@ -251,6 +165,9 @@
 
         function hexToRgb(hex) {
             hex = hex.replace('#', '');
+            if (hex.length === 3) {
+                hex = hex.split('').map(char => char + char).join('');
+            }
             return {
                 r: parseInt(hex.substring(0, 2), 16),
                 g: parseInt(hex.substring(2, 4), 16),
@@ -384,7 +301,7 @@
 
         function updateFromHex() {
             let hex = hexInput.value.toUpperCase();
-            if (!/^#[0-9A-F]{6}$/.test(hex)) return;
+            if (!/^#([0-9A-F]{3}){1,2}$/i.test(hex)) return;
             const { r, g, b } = hexToRgb(hex);
             updateFromRgb(r, g, b);
         }
@@ -480,31 +397,7 @@
             k = Math.max(0, Math.min(100, k));
 
             const { r, g, b } = cmykToRgb(c, m, y, k);
-
-            const { hsvH, hsvS, hsvV } = rgbToHsv(r, g, b);
-            h = hsvH;
-            s = hsvS / 100;
-            v = hsvV / 100;
-
-            updateSelectors();
-
-            document.body.style.backgroundColor = `rgb(${r},${g},${b})`;
-            picker.style.background = `linear-gradient(to top, black 0%, transparent 100%),
-                                        linear-gradient(to right, white 0%, hsl(${h}, 100%, 50%) 100%)`;
-
-            const hex = rgbToHex(r, g, b);
-            const { hslH, hslS, hslL } = rgbToHsl(r, g, b);
-
-            hexInput.value = hex;
-            rInput.value = r;
-            gInput.value = g;
-            bInput.value = b;
-            hInput.value = Math.round(hslH);
-            sInput.value = Math.round(hslS);
-            lInput.value = Math.round(hslL);
-            hsvHInput.value = Math.round(hsvH);
-            hsvSInput.value = Math.round(hsvS);
-            hsvVInput.value = Math.round(hsvV);
+            updateFromRgb(r, g, b);
         }
 
         function updateSelectors() {
@@ -513,37 +406,90 @@
             svSelector.style.top = `${(1 - v) * 100}%`;
         }
 
-        hueSlider.addEventListener('click', (e) => {
+        function handleDrag(slider, onDrag) {
+            function start(e) {
+                onDrag(e);
+                window.addEventListener('mousemove', onDrag);
+                window.addEventListener('touchmove', onDrag);
+                window.addEventListener('mouseup', end);
+                window.addEventListener('touchend', end);
+            }
+            function end() {
+                window.removeEventListener('mousemove', onDrag);
+                window.removeEventListener('touchmove', onDrag);
+            }
+            slider.addEventListener('mousedown', start);
+            slider.addEventListener('touchstart', start);
+        }
+
+        handleDrag(hueSlider, (e) => {
             const rect = hueSlider.getBoundingClientRect();
-            h = (e.clientX - rect.left) / rect.width * 360;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            let left = (clientX - rect.left) / rect.width;
+            h = Math.max(0, Math.min(1, left)) * 360;
             hueSelector.style.left = `${(h / 360) * 100}%`;
             updateColor();
         });
 
-        picker.addEventListener('click', (e) => {
+        handleDrag(picker, (e) => {
             const rect = picker.getBoundingClientRect();
-            s = (e.clientX - rect.left) / rect.width;
-            v = 1 - (e.clientY - rect.top) / rect.height;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            s = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+            v = 1 - Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
             svSelector.style.left = `${s * 100}%`;
             svSelector.style.top = `${(1 - v) * 100}%`;
             updateColor();
         });
 
-        hexInput.addEventListener('input', updateFromHex);
-        rInput.addEventListener('input', () => updateFromRgb());
-        gInput.addEventListener('input', () => updateFromRgb());
-        bInput.addEventListener('input', () => updateFromRgb());
-        hInput.addEventListener('input', updateFromHsl);
-        sInput.addEventListener('input', updateFromHsl);
-        lInput.addEventListener('input', updateFromHsl);
-        hsvHInput.addEventListener('input', updateFromHsv);
-        hsvSInput.addEventListener('input', updateFromHsv);
-        hsvVInput.addEventListener('input', updateFromHsv);
-        cInput.addEventListener('input', updateFromCmyk);
-        mInput.addEventListener('input', updateFromCmyk);
-        yInput.addEventListener('input', updateFromCmyk);
-        kInput.addEventListener('input', updateFromCmyk);
 
+        hexInput.addEventListener('input', updateFromHex);
+        [rInput, gInput, bInput].forEach(el => el.addEventListener('input', () => updateFromRgb()));
+        [hInput, sInput, lInput].forEach(el => el.addEventListener('input', updateFromHsl));
+        [hsvHInput, hsvSInput, hsvVInput].forEach(el => el.addEventListener('input', updateFromHsv));
+        [cInput, mInput, yInput, kInput].forEach(el => el.addEventListener('input', updateFromCmyk));
+
+        const copyIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>`;
+        const successIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>`;
+
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const format = button.dataset.format;
+                let textToCopy = '';
+
+                switch (format) {
+                    case 'hex':
+                        textToCopy = hexInput.value;
+                        break;
+                    case 'rgb':
+                        textToCopy = `rgb(${rInput.value}, ${gInput.value}, ${bInput.value})`;
+                        break;
+                    case 'hsl':
+                        textToCopy = `hsl(${hInput.value}, ${sInput.value}%, ${lInput.value}%)`;
+                        break;
+                    case 'hsv':
+                        textToCopy = `hsv(${hsvHInput.value}, ${hsvSInput.value}%, ${hsvVInput.value}%)`;
+                        break;
+                    case 'cmyk':
+                        textToCopy = `cmyk(${cInput.value}%, ${mInput.value}%, ${yInput.value}%, ${kInput.value}%)`;
+                        break;
+                }
+
+                if (textToCopy && navigator.clipboard) {
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        button.innerHTML = successIconSVG;
+                        setTimeout(() => {
+                            button.innerHTML = copyIconSVG;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Falha ao copiar o texto: ', err);
+                        alert('Falha ao copiar!');
+                    });
+                }
+            });
+        });
+
+        // Inicialização
         hueSelector.style.left = '0%';
         svSelector.style.left = '100%';
         svSelector.style.top = '0%';
